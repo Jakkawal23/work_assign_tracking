@@ -1,0 +1,86 @@
+import { SHARED_PRIMENG } from '@/shared/shared-primeng';
+import { Component } from '@angular/core';
+import { ManageWorkerService, Product } from '../service/manage-worker.service';
+import { ObjectUtils } from 'primeng/utils';
+
+interface expandedRows {
+  [key: string]: boolean;
+}
+
+@Component({
+  selector: 'app-manage-tasks',
+  imports: [SHARED_PRIMENG],
+  templateUrl: './manage-tasks.html',
+  styleUrl: './manage-tasks.scss',
+  providers: [ManageWorkerService]
+})
+export class ManageTasks {
+
+  products: Product[] = [];
+
+  expandedRows: expandedRows = {};
+
+  isExpanded: boolean = false;
+
+  constructor(
+    // private customerService: CustomerService,
+    private productService: ManageWorkerService
+  ) { }
+
+  ngOnInit() {
+    this.productService.getProductsWithOrdersSmall().then((data) => (this.products = data));
+
+  }
+
+  expandAll() {
+    if (ObjectUtils.isEmpty(this.expandedRows)) {
+      this.expandedRows = this.products.reduce(
+        (acc, p) => {
+          if (p.id) {
+            acc[p.id] = true;
+          }
+          return acc;
+        },
+        {} as { [key: string]: boolean }
+      );
+      this.isExpanded = true;
+    } else {
+      this.collapseAll()
+    }
+
+  }
+
+  collapseAll() {
+    this.expandedRows = {};
+    this.isExpanded = false;
+  }
+
+  getSeverity(status: string) {
+    switch (status) {
+      case 'qualified':
+      case 'instock':
+      case 'INSTOCK':
+      case 'DELIVERED':
+      case 'delivered':
+        return 'success';
+
+      case 'negotiation':
+      case 'lowstock':
+      case 'LOWSTOCK':
+      case 'PENDING':
+      case 'pending':
+        return 'warn';
+
+      case 'unqualified':
+      case 'outofstock':
+      case 'OUTOFSTOCK':
+      case 'CANCELLED':
+      case 'cancelled':
+        return 'danger';
+
+      default:
+        return 'info';
+    }
+  }
+
+}

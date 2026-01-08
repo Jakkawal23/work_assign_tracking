@@ -1,0 +1,13 @@
+<p-dialog [(visible)]="visible" [modal]="true" [closable]="false" [style]="{width: '400px'}">
+  <ng-template pTemplate="header">
+    <i *ngIf="options.icon" [class]="options.icon" style="margin-right:0.5rem"></i>
+    {{ options.header || 'Confirm' }}
+  </ng-template>
+
+  <div class="confirmation-message">{{ options.message }}</div>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" icon="pi pi-times" class="p-button-text" (click)="reject()"></p-button>
+    <p-button label="Yes" icon="pi pi-check" class="p-button-success" (click)="accept()"></p-button>
+  </ng-template>
+</p-dialog>

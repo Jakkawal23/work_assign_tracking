@@ -20,7 +20,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { DatePickerModule } from 'primeng/datepicker';
 export const SHARED_PRIMENG = [
     CommonModule,
     FormsModule,
@@ -42,5 +42,6 @@ export const SHARED_PRIMENG = [
     InputNumberModule,
     InputIconModule,
     IconFieldModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DatePickerModule  
 ];

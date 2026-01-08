@@ -1,7 +1,7 @@
 <div class="flex flex-col">
     <div class="card">
         <div class="font-semibold text-xl">Manage Project</div>
-        <p-dataview [value]="products" [layout]="layout">
+        <p-dataview [value]="projects" [layout]="layout">
             <ng-template #header>
                 <div class="flex justify-end">
                     <p-button label="Add" icon="pi pi-plus" styleClass="w-full" class="mr-4" (onClick)="openNew()"></p-button>
@@ -21,39 +21,26 @@
                             [ngClass]="{ 'border-t border-surface': i !== 0 }">
                             <div class="md:w-40 relative">
                                 <img class="block xl:block mx-auto rounded w-full"
-                                    src="https://primefaces.org/cdn/primevue/images/product/{{ item.image }}"
-                                    [alt]="item.name" />
+                                    src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/3:2/w_1920,c_limit/google-logo.jpg"
+                                    [alt]="item.name_en" />
                                 <div class="absolute bg-black/70 rounded-border" [style]="{ left: '4px', top: '4px' }">
-                                    <p-tag [value]="item.inventoryStatus" [severity]="getSeverity(item)"></p-tag>
+                                    <p-tag [value]="item.status" [severity]="getSeverity(item)"></p-tag>
                                 </div>
                             </div>
                             <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
                                 <div class="flex flex-row md:flex-col justify-between items-start gap-2">
-                                    <div>
-                                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{
-                                            item.category }}</span>
-                                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
-                                    </div>
-                                    <div class="bg-surface-100 p-1" style="border-radius: 30px">
-                                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2"
-                                            style="
-                                                    border-radius: 30px;
-                                                    box-shadow:
-                                                        0px 1px 2px 0px rgba(0, 0, 0, 0.04),
-                                                        0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-                                                ">
-                                            <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
-                                            <i class="pi pi-star-fill text-yellow-500"></i>
+                                    <!-- <div> -->
+                                        <div class="text-lg font-medium">{{ item.name_en}}</div>
+                                        <div class="font-medium text-surface-500 dark:text-surface-400 text-sm mt-2">
+                                            {{ item.start_date?.toDate() | date:'dd/MM/yyyy' }} - {{ item.end_date?.toDate() | date:'dd/MM/yyyy' }}
                                         </div>
-                                    </div>
+                                        <div class="font-medium text-surface-500 dark:text-surface-400 text-sm mt-2">{{item.description}}</div>
+                                    <!-- </div> -->
                                 </div>
                                 <div class="flex flex-col md:items-end gap-8">
-                                    <span class="text-xl font-semibold">$ {{ item.price }}</span>
                                     <div class="flex flex-row-reverse md:flex-row gap-2">
-                                        <p-button icon="pi pi-heart" styleClass="h-full" [outlined]="true"></p-button>
-                                        <p-button icon="pi pi-shopping-cart" label="Buy Now"
-                                            [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
-                                            styleClass="flex-auto md:flex-initial whitespace-nowrap"></p-button>
+                                        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"/>
+                                        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -69,44 +56,32 @@
                             class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col">
                             <div class="relative w-full shadow-sm">
                                 <img class="rounded w-full"
-                                    src="https://primefaces.org/cdn/primevue/images/product/{{ item.image }}"
+                                    src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/3:2/w_1920,c_limit/google-logo.jpg"
                                     [alt]="item.name" />
                                 <div class="absolute bg-black/70 rounded-border" [style]="{
                                             left: '4px',
                                             top: '4px'
                                         }">
-                                    <p-tag [value]="item.inventoryStatus" [severity]="getSeverity(item)"></p-tag>
+                                    <p-tag [value]="item.status" [severity]="getSeverity(item)"></p-tag>
                                 </div>
                             </div>
                             <div class="pt-12">
                                 <div class="flex flex-row justify-between items-start gap-2">
                                     <div>
-                                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{
-                                            item.category }}</span>
-                                        <div class="text-lg font-medium mt-1">
-                                            {{ item.name }}
+                                        <div class="text-lg font-medium">{{ item.name_en}}</div>
+                                        <div class="font-medium text-surface-500 dark:text-surface-400 text-sm mt-2">
+                                            {{ item.start_date?.toDate() | date:'dd/MM/yyyy' }} - {{ item.end_date?.toDate() | date:'dd/MM/yyyy' }}
                                         </div>
-                                    </div>
-                                    <div class="bg-surface-100 p-1" style="border-radius: 30px">
-                                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2"
-                                            style="
-                                                    border-radius: 30px;
-                                                    box-shadow:
-                                                        0px 1px 2px 0px rgba(0, 0, 0, 0.04),
-                                                        0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-                                                ">
-                                            <span class="text-surface-900 font-medium text-xs">{{ item.rating }}</span>
-                                            <i class="pi pi-star-fill text-yellow-500"></i>
-                                        </div>
+                                        <div class="font-medium text-surface-500 dark:text-surface-400 text-sm mt-2">{{item.description}}</div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-6 mt-6">
-                                    <span class="text-2xl font-semibold">$ {{ item.price }}</span>
-                                    <div class="flex gap-2">
-                                        <p-button icon="pi pi-shopping-cart" label="Buy Now"
-                                            [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
-                                            class="flex-auto whitespace-nowrap" styleClass="w-full"></p-button>
-                                        <p-button icon="pi pi-heart" styleClass="h-full" [outlined]="true"></p-button>
+                                    <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                                        <div></div>
+                                        <div class="flex gap-2">
+                                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editProject(item)"/>
+                                            <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteProject(item)"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,68 +94,55 @@
 </div>
 
 
-<p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
+<p-dialog [(visible)]="projectDialog" [style]="{ width: '720px' }" header="Project Details" [modal]="true">
     <ng-template #content>
         <div class="flex flex-col gap-6">
-            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.image"
-                class="block m-auto pb-4" *ngIf="product.image" />
-            <div>
-                <label for="name" class="block font-bold mb-3">Name</label>
-                <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus fluid />
-                <small class="text-red-500" *ngIf="submitted && !product.name">Name is required.</small>
-            </div>
-            <div>
-                <label for="description" class="block font-bold mb-3">Description</label>
-                <textarea id="description" pTextarea [(ngModel)]="product.description" required rows="3" cols="20"
-                    fluid></textarea>
-            </div>
-
-            <div>
-                <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses"
-                    optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
-            </div>
-
-            <div>
-                <span class="block font-bold mb-4">Category</span>
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="flex items-center gap-2 col-span-6">
-                        <p-radiobutton id="category1" name="category" value="Accessories"
-                            [(ngModel)]="product.category" />
-                        <label for="category1">Accessories</label>
-                    </div>
-                    <div class="flex items-center gap-2 col-span-6">
-                        <p-radiobutton id="category2" name="category" value="Clothing" [(ngModel)]="product.category" />
-                        <label for="category2">Clothing</label>
-                    </div>
-                    <div class="flex items-center gap-2 col-span-6">
-                        <p-radiobutton id="category3" name="category" value="Electronics"
-                            [(ngModel)]="product.category" />
-                        <label for="category3">Electronics</label>
-                    </div>
-                    <div class="flex items-center gap-2 col-span-6">
-                        <p-radiobutton id="category4" name="category" value="Fitness" [(ngModel)]="product.category" />
-                        <label for="category4">Fitness</label>
-                    </div>
+            <!-- <img src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/3:2/w_1920,c_limit/google-logo.jpg" [alt]="product.name_en"
+                class="block m-auto pb-4"/> -->
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-6">
+                    <label for="name_th" class="block font-bold mb-3">Name TH</label>
+                    <input type="text" pInputText id="name_th" [(ngModel)]="product.name_th" required autofocus fluid />
+                    <small class="text-red-500" *ngIf="submitted && !product.name_th">Name TH is required.</small>
+                </div>
+                <div class="col-span-6">
+                    <label for="name_en" class="block font-bold mb-3">Name EN</label>
+                    <input type="text" pInputText id="name_en" [(ngModel)]="product.name_en" required autofocus fluid />
+                    <small class="text-red-500" *ngIf="submitted && !product.name_en">Name EN is required.</small>
                 </div>
             </div>
 
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-6">
-                    <label for="price" class="block font-bold mb-3">Price</label>
-                    <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"
-                        fluid />
+                    <label for="start_date" class="block font-bold mb-3">Start Date</label>
+                    <p-datepicker class="w-full" [(ngModel)]="product.start_date" />
+                    <small class="text-red-500" *ngIf="submitted && !product.start_date">Start Date is required.</small>
                 </div>
+
                 <div class="col-span-6">
-                    <label for="quantity" class="block font-bold mb-3">Quantity</label>
-                    <p-inputnumber id="quantity" [(ngModel)]="product.quantity" fluid />
+                    <label for="end_date" class="block font-bold mb-3">Start Date</label>
+                    <p-datepicker class="w-full" [(ngModel)]="product.end_date" />
+                    <small class="text-red-500" *ngIf="submitted && !product.end_date">End Date is required.</small>
                 </div>
+            </div>
+
+
+            <div>
+                <label for="inventoryStatus" class="block font-bold mb-3">Status</label>
+                <p-select [(ngModel)]="product.status" inputId="inventoryStatus" [options]="statuses"
+                    optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+            </div>
+
+            <div>
+                <label for="description" class="block font-bold mb-3">Description</label>
+                <textarea id="description" pTextarea [(ngModel)]="product.description" required rows="3" cols="20"
+                    fluid></textarea>
             </div>
         </div>
     </ng-template>
 
     <ng-template #footer>
         <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-        <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveProject()" />
     </ng-template>
 </p-dialog>

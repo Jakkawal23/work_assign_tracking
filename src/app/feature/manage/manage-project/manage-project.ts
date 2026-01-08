@@ -1,53 +1,68 @@
 import { SHARED_PRIMENG } from '@/shared/shared-primeng';
 import { Component } from '@angular/core';
-import { ManageWorkerService, Product } from '../service/manage-worker.service';
+import { ManageProjectService } from './manage-project.service';
+import { Project } from '@/shared/models/project.model';
+import { ConfirmationService } from '@/shared/component/confirmation-dialog/confirmation.service';
 
 @Component({
   selector: 'app-manage-project',
   imports: [SHARED_PRIMENG],
   templateUrl: './manage-project.html',
   styleUrl: './manage-project.scss',
-  providers: [ManageWorkerService],
+  providers: [ManageProjectService],
 })
 export class ManageProject {
   layout: 'list' | 'grid' = 'list';
 
   options = ['list', 'grid'];
-
-  products: Product[] = [];
-
-  product!: Product;
-  productDialog: boolean = false;
+  
+  
+  projectDialog: boolean = false;
+  
   submitted: boolean = false;
-
+  
   statuses!: any[];
+  
+  product: Partial<Project> = {};
 
-  constructor(private manageWorkerService: ManageWorkerService) { }
+  projects: any[] = [];
+  companyId = 'Kew12bAspsjm1A0R2JBM'; 
 
-  ngOnInit() {
-    this.manageWorkerService.getProductsSmall().then((data) => (this.products = data.slice(0, 6)));
+  constructor(
+    private manageProjectService: ManageProjectService,
+    private confirmationService: ConfirmationService
+  ) { }
+
+  async ngOnInit() {
 
     this.loadDemoData();
+
+
+    this.projects = await this.manageProjectService.loadProjects(this.companyId);
   }
 
   loadDemoData() {
     this.statuses = [
-      { label: 'INSTOCK', value: 'instock' },
-      { label: 'LOWSTOCK', value: 'lowstock' },
-      { label: 'OUTOFSTOCK', value: 'outofstock' }
+      { label: 'Pending', value: 'Pending' },
+      { label: 'Process', value: 'Process' },
+      { label: 'Complete', value: 'Complete' },
+      { label: 'Cancel', value: 'Cancel' },
     ];
   }
 
 
-  getSeverity(product: Product) {
-    switch (product.inventoryStatus) {
-      case 'INSTOCK':
-        return 'success';
+  getSeverity(product: Project) {
+    switch (product.status) {
+      case 'Pending':
+        return 'info';
 
-      case 'LOWSTOCK':
+      case 'Process':
         return 'warn';
 
-      case 'OUTOFSTOCK':
+      case 'Complete':
+        return 'success';
+
+      case 'Cancel':
         return 'danger';
 
       default:
@@ -58,42 +73,93 @@ export class ManageProject {
   openNew() {
     this.product = {};
     this.submitted = false;
-    this.productDialog = true;
+    this.projectDialog = true;
   }
 
   hideDialog() {
-    this.productDialog = false;
+    this.projectDialog = false;
     this.submitted = false;
   }
 
-  saveProduct() {
-    this.submitted = true;
-    // this.submitted = true;
-    // let _products = this.products();
-    // if (this.product.name?.trim()) {
-    //   if (this.product.id) {
-    //     _products[this.findIndexById(this.product.id)] = this.product;
-    //     this.products.set([..._products]);
-    //     this.messageService.add({
-    //       severity: 'success',
-    //       summary: 'Successful',
-    //       detail: 'Product Updated',
-    //       life: 3000
-    //     });
-    //   } else {
-    //     this.product.id = this.createId();
-    //     this.product.image = 'product-placeholder.svg';
-    //     this.messageService.add({
-    //       severity: 'success',
-    //       summary: 'Successful',
-    //       detail: 'Product Created',
-    //       life: 3000
-    //     });
-    //     this.products.set([..._products, this.product]);
-    //   }
-
-    //   this.productDialog = false;
-    //   this.product = {};
-    // }
+  editProject(project: Project) {
+    this.product = { ...project };
+    this.submitted = false;
+    this.projectDialog = true;
   }
+
+  deleteProject(project: Project) {
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete project "${project.name_th}"?`,
+      header: 'Confirm Delete',
+      icon: 'pi pi-exclamation-triangle',
+      accept: async () => {
+        try {
+          await this.manageProjectService.deleteProject(this.companyId, project.id!);
+          this.projects = await this.manageProjectService.loadProjects(this.companyId);
+        } catch (error) {
+          console.error('Error deleting project:', error);
+        }
+      },
+      reject: () => {
+        console.log('Delete cancelled');
+      }
+    });
+  }
+
+
+  async saveProject() {
+    this.submitted = true;
+
+    if (!this.product.name_th?.trim() || !this.product.name_en?.trim() || !this.product.start_date || !this.product.end_date) {
+      return;
+    }
+
+    try {
+      if (this.product.id) {
+        // Update
+        await this.manageProjectService.updateProject(
+          this.companyId,
+          this.product.id,
+          this.product
+        );
+        // this.messageService.add({
+        //   severity: 'success',
+        //   summary: 'Updated',
+        //   detail: 'Project updated successfully',
+        //   life: 3000
+        // });
+      } else {
+        // Create
+        const newProject = {
+          ...this.product,
+          start_date: this.product.start_date,
+          end_date: this.product.end_date,
+        };
+
+        await this.manageProjectService.addProject(this.companyId, newProject);
+        // this.messageService.add({
+        //   severity: 'success',
+        //   summary: 'Created',
+        //   detail: 'Project created successfully',
+        //   life: 3000
+        // });
+      }
+
+      // refresh list
+      this.projects = await this.manageProjectService.loadProjects(this.companyId);
+
+      // close dialog
+      this.projectDialog = false;
+      this.product = {}; // reset form
+    } catch (error) {
+      console.error('Error saving project:', error);
+    //   this.messageService.add({
+    //     severity: 'error',
+    //     summary: 'Error',
+    //     detail: 'Could not save project',
+    //     life: 3000
+    //   });
+    }
+  }
+
 }

@@ -21,6 +21,20 @@ export class AppMenu {
     ngOnInit() {
         this.model = [
             {
+                label: 'Management',
+                items: [
+                    { label: 'Manage Project', icon: 'pi pi-fw pi-building', routerLink: ['/manage/project'] },
+                    { label: 'Manage Tasks', icon: 'pi pi-fw pi-list-check', routerLink: ['/manage/tasks'] },
+                    { label: 'Manage Worker', icon: 'pi pi-fw pi-user', routerLink: ['/manage/worker'] }
+                ]
+            },
+            {
+                label: 'Transaction',
+                items: [
+                    { label: 'Daily Plan', icon: 'pi pi-fw pi-calendar', routerLink: ['/transaction/daily-plan'] },
+                ]
+            },
+            {
                 label: 'Home',
                 items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
             },

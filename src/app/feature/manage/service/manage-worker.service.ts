@@ -26,11 +26,11 @@ export class ManageWorkerService {
             {
                 id: '1000',
                 code: 'f230fh0g3',
-                name: 'Bamboo Watch',
+                name: 'Name01 Lastname01',
                 description: 'Product Description',
                 image: 'bamboo-watch.jpg',
                 price: 65,
-                category: 'Accessories',
+                category: 'A001',
                 quantity: 24,
                 inventoryStatus: 'INSTOCK',
                 rating: 5
@@ -38,11 +38,11 @@ export class ManageWorkerService {
             {
                 id: '1001',
                 code: 'nvklal433',
-                name: 'Black Watch',
+                name: 'Name02 Lastname02',
                 description: 'Product Description',
                 image: 'black-watch.jpg',
                 price: 72,
-                category: 'Accessories',
+                category: 'A002',
                 quantity: 61,
                 inventoryStatus: 'INSTOCK',
                 rating: 4
@@ -50,50 +50,14 @@ export class ManageWorkerService {
             {
                 id: '1002',
                 code: 'zz21cz3c1',
-                name: 'Blue Band',
+                name: 'Name03 Lastname03',
                 description: 'Product Description',
                 image: 'blue-band.jpg',
                 price: 79,
-                category: 'Fitness',
+                category: 'A003',
                 quantity: 2,
                 inventoryStatus: 'LOWSTOCK',
                 rating: 3
-            },
-            {
-                id: '1003',
-                code: '244wgerg2',
-                name: 'Blue T-Shirt',
-                description: 'Product Description',
-                image: 'blue-t-shirt.jpg',
-                price: 29,
-                category: 'Clothing',
-                quantity: 25,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
-            },
-            {
-                id: '1004',
-                code: 'h456wer53',
-                name: 'Bracelet',
-                description: 'Product Description',
-                image: 'bracelet.jpg',
-                price: 15,
-                category: 'Accessories',
-                quantity: 73,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
-            },
-            {
-                id: '1005',
-                code: 'av2231fwg',
-                name: 'Brown Purse',
-                description: 'Product Description',
-                image: 'brown-purse.jpg',
-                price: 120,
-                category: 'Accessories',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4
             },
         ];
     }
@@ -147,6 +111,24 @@ export class ManageWorkerService {
                         quantity: 3,
                         customer: 'Claire Morrow',
                         status: 'CANCELLED'
+                    },
+                    {
+                        id: '1000-4',
+                        productCode: 'f230fh0g3',
+                        date: '2020-09-13',
+                        amount: 195,
+                        quantity: 3,
+                        customer: 'Claire Morrow',
+                        status: 'CANCELLED'
+                    },
+                    {
+                        id: '1000-5',
+                        productCode: 'f230fh0g3',
+                        date: '2020-09-13',
+                        amount: 195,
+                        quantity: 3,
+                        customer: 'Claire Morrow',
+                        status: 'CANCELLED'
                     }
                 ]
             },
@@ -173,6 +155,24 @@ export class ManageWorkerService {
                     },
                     {
                         id: '1001-1',
+                        productCode: 'nvklal433',
+                        date: '2020-02-28',
+                        amount: 144,
+                        quantity: 2,
+                        customer: 'Octavia Murillo',
+                        status: 'PENDING'
+                    },
+                    {
+                        id: '1001-2',
+                        productCode: 'nvklal433',
+                        date: '2020-02-28',
+                        amount: 144,
+                        quantity: 2,
+                        customer: 'Octavia Murillo',
+                        status: 'PENDING'
+                    },
+                    {
+                        id: '1001-3',
                         productCode: 'nvklal433',
                         date: '2020-02-28',
                         amount: 144,
@@ -211,91 +211,122 @@ export class ManageWorkerService {
                         quantity: 1,
                         customer: 'Ashley Wickens',
                         status: 'DELIVERED'
-                    }
-                ]
-            },
-            {
-                id: '1003',
-                code: '244wgerg2',
-                name: 'Blue T-Shirt',
-                description: 'Product Description',
-                image: 'blue-t-shirt.jpg',
-                price: 29,
-                category: 'Clothing',
-                quantity: 25,
-                inventoryStatus: 'INSTOCK',
-                rating: 5,
-                orders: []
-            },
-            {
-                id: '1004',
-                code: 'h456wer53',
-                name: 'Bracelet',
-                description: 'Product Description',
-                image: 'bracelet.jpg',
-                price: 15,
-                category: 'Accessories',
-                quantity: 73,
-                inventoryStatus: 'INSTOCK',
-                rating: 4,
-                orders: [
-                    {
-                        id: '1004-0',
-                        productCode: 'h456wer53',
-                        date: '2020-09-05',
-                        amount: 60,
-                        quantity: 4,
-                        customer: 'Mayumi Misaki',
-                        status: 'PENDING'
                     },
                     {
-                        id: '1004-1',
-                        productCode: 'h456wer53',
-                        date: '2019-04-16',
-                        amount: 2,
-                        quantity: 30,
-                        customer: 'Francesco Salvatore',
-                        status: 'DELIVERED'
-                    }
-                ]
-            },
-            {
-                id: '1005',
-                code: 'av2231fwg',
-                name: 'Brown Purse',
-                description: 'Product Description',
-                image: 'brown-purse.jpg',
-                price: 120,
-                category: 'Accessories',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4,
-                orders: [
-                    {
-                        id: '1005-0',
-                        productCode: 'av2231fwg',
-                        date: '2020-01-25',
-                        amount: 120,
+                        id: '1002-2',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
                         quantity: 1,
-                        customer: 'Isabel Sinclair',
-                        status: 'RETURNED'
-                    },
-                    {
-                        id: '1005-1',
-                        productCode: 'av2231fwg',
-                        date: '2019-03-12',
-                        amount: 240,
-                        quantity: 2,
-                        customer: 'Lionel Clifford',
+                        customer: 'Ashley Wickens',
                         status: 'DELIVERED'
                     },
                     {
-                        id: '1005-2',
-                        productCode: 'av2231fwg',
-                        date: '2019-05-05',
-                        amount: 120,
+                        id: '1002-3',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
                         quantity: 1,
-                        customer: 'Cody Chavez',
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-4',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
+                        status: 'DELIVERED'
+                    },
+                    {
+                        id: '1002-5',
+                        productCode: 'zz21cz3c1',
+                        date: '2020-02-06',
+                        amount: 79,
+                        quantity: 1,
+                        customer: 'Ashley Wickens',
                         status: 'DELIVERED'
                     }
                 ]

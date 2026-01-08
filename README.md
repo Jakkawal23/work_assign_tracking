@@ -1,6 +1,10 @@
-# Sakai19
+# Web use base component of Sakai19
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+
+* Angular v20
+* PrimeNG v20
+* Tailwind v4
 
 ## Development server
 
@@ -59,6 +63,12 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 
-Angular v20
-PrimeNG v20
-Tailwind v4
+
+## Example
+![Example](/src/assets/images/20250916_01.png)
+![Example](/src/assets/images/20250916_02.png)
+![Example](/src/assets/images/20250916_03.png)
+![Example](/src/assets/images/20250916_04.png)
+![Example](/src/assets/images/20250916_05.png)
+![Example](/src/assets/images/20250916_06.png)
+![Example](/src/assets/images/20250916_07.png)

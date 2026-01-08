@@ -1,42 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { DataViewModule } from 'primeng/dataview';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { TagModule } from 'primeng/tag';
-import { ManageWorkerService, Product } from './manage-worker.service';
-import { DialogModule } from 'primeng/dialog';
-import { SelectModule } from 'primeng/select';
-import { RatingModule } from 'primeng/rating';
-import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
-import { TableModule } from 'primeng/table';
-import { ToastModule } from 'primeng/toast';
-import { RippleModule } from 'primeng/ripple';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { ToolbarModule } from 'primeng/toolbar';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputIconModule } from 'primeng/inputicon';
-import { IconFieldModule } from 'primeng/iconfield';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ManageWorkerService, Product } from '../service/manage-worker.service';
+import { SHARED_PRIMENG } from '@/shared/shared-primeng';
 
 
 @Component({
   selector: 'app-manage-worker',
-  imports: [CommonModule, DataViewModule, ButtonModule, SelectButtonModule, FormsModule, TagModule, DialogModule, SelectModule,
-    RatingModule ,InputTextModule, TextareaModule ,
-    CommonModule,
-        TableModule,
-        RippleModule,
-        ToastModule,
-        ToolbarModule,
-        RadioButtonModule,
-        InputNumberModule,
-        InputIconModule,
-        IconFieldModule,
-        ConfirmDialogModule
-  ],
+  imports: [SHARED_PRIMENG],
   templateUrl: './manage-worker.html',
   styleUrl: './manage-worker.scss',
   providers: [ManageWorkerService],
